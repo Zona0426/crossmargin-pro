@@ -1,0 +1,57 @@
+# Node & Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment & Private Keys
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Operating System & IDE files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Office temp/lock files
+~$*
+*.tmp
+*.temp
+*.log
+
+# Antigravity & Agent workspace artifacts/cache
+.gemini/
+.claude/
+
+# Temporary & Build files
+dist/
+build/
+
+# ==========================================
+# 🛡️ 商業核心機密與插件程式碼防護 (禁止公開)
+# ==========================================
+# Chrome 擴充套件核心原始碼
+extension/
+CrossMargin_Pro_*.zip
+*.zip
+
+# GAS 後端系統與自動發貨系統
+全自動發貨系統/
+gas_backend.js
+
+# 內部商業文件、企劃書與開發進度表
+開發企劃書.pdf
+開發進度儀表板.xlsx
+private.md
+STORE_LISTING.md
+
+# 本地 Python 生成腳本
+generate_promo_tiles.py
+generate_screenshots.py

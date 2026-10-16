@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrossMargin Pro - 專業版訂閱與方案續訂</title>
+  <link rel="icon" href="icons/icon48.png" type="image/png">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent: #10b981;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+    .checkout-container {
+      width: 100%;
+      max-width: 520px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+    .brand-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 20px;
+      font-weight: 800;
+      color: #60a5fa;
+      margin-bottom: 6px;
+    }
+    .brand-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .plan-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .plan-card {
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      background: #182234;
+      text-align: center;
+    }
+    .plan-card.active {
+      border-color: #3b82f6;
+      background: #1e3a8a33;
+    }
+    .plan-badge {
+      position: absolute;
+      top: -10px;
+      right: 10px;
+      background: #dc2626;
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 7px;
+      border-radius: 10px;
+    }
+    .plan-title {
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .plan-price {
+      font-size: 24px;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+    .plan-unit {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .plan-detail {
+      font-size: 11px;
+      color: #93c5fd;
+      margin-top: 6px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: #0f172a;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus {
+      border-color: #3b82f6;
+    }
+    .features-list {
+      background: #0f172a88;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 24px;
+    }
+    .feature-item {
+      font-size: 12px;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .feature-item:last-child {
+      margin-bottom: 0;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: #10b981;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-submit:hover {
+      background: #059669;
+      transform: translateY(-1px);
+    }
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+    .security-notice {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .footer-links {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .footer-links a {
+      color: #60a5fa;
+      text-decoration: none;
+      margin: 0 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkout-container">
+    <div class="brand-header">
+      <div class="brand-logo">
+        <span>⚡ CrossMargin Pro</span>
+      </div>
+      <div class="brand-desc">台灣跨境代購主與電商賣家必備利潤試算工具</div>
+    </div>
+
+    <!-- 方案選擇 -->
+    <div class="plan-selector">
+      <div class="plan-card active" id="cardMonthly" onclick="selectPlan('MONTHLY')">
+        <div class="plan-title">專業月租版</div>
+        <div class="plan-price">NT$ 99</div>
+        <div class="plan-unit">31 天全功能 / 1 台裝置</div>
+        <div class="plan-detail">適合短期代購試水溫</div>
+      </div>
+
+      <div class="plan-card" id="cardYearly" onclick="selectPlan('YEARLY')">
+        <span class="plan-badge">省下 NT$ 289</span>
+        <div class="plan-title">工作室年租版</div>
+        <div class="plan-price">NT$ 899</div>
+        <div class="plan-unit">366 天全功能 / 2 台裝置</div>
+        <div class="plan-detail">相當於每月 $75 / 團隊首選</div>
+      </div>
+    </div>
+
+    <!-- 權益亮點 -->
+    <div class="features-list">
+      <div class="feature-item">✔ <strong>無限容量選品庫存箱</strong>（突破免費版 3 筆上限）</div>
+      <div class="feature-item">✔ <strong>每日無限制 Excel 進貨單匯出</strong>（附 10 大電商採購欄位）</div>
+      <div class="feature-item">✔ <strong>一鍵無限高清圖影 ZIP 打包下載</strong></div>
+      <div class="feature-item">✔ <strong>自由自訂安全避險匯率 & 社群代購報價單</strong></div>
+    </div>
+
+    <!-- 表單填寫 -->
+    <div class="form-group">
+      <label class="form-label" for="emailInput">買家 Email 電子郵件 (序號將自動寄發至此信箱)：</label>
+      <input type="email" class="form-input" id="emailInput" placeholder="例如：yourname@gmail.com" required>
+    </div>
+
+    <div style="margin: -6px 0 16px 0; font-size: 12px; color: #475569; line-height: 1.5; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 10px 12px;">
+      💡 <strong>重要提醒：</strong>付款完成後系統將於數秒內發送 16 碼啟用序號通知信至您的 Email。若在收件匣未看見，請務必查看<strong>「垃圾郵件匣」</strong>或<strong>「促銷內容」</strong>分頁！
+    </div>
+
+    <button class="btn-submit" id="submitBtn" onclick="handleCheckout()">
+      <span>🔒 前往綠界科技安全結帳 (NT$ <span id="btnPriceText">99</span>)</span>
+    </button>
+
+    <div class="security-notice">
+      <span>🛡️ 綠界科技 256-bit SSL 加密安全傳輸・支援台灣信用卡/超商代碼/ATM</span>
+    </div>
+  </div>
+
+  <div class="footer-links">
+    <a href="PRIVACY_POLICY.md" target="_blank">隱私權政策</a> | 
+    <a href="mailto:alice571920@gmail.com">客服聯繫</a>
+    <div style="margin-top: 4px;">© 2026 CrossMargin Pro. All Rights Reserved.</div>
+  </div>
+
+  <!-- 隱藏的綠界 POST 轉發表單 -->
+  <form id="ecpayForm" method="POST" action="" style="display:none;"></form>
+
+  <script>
+    // 預設選中方案
+    let currentPlan = 'MONTHLY';
+    const plans = {
+      MONTHLY: { name: 'CrossMargin Pro 專業月租版', price: 99, days: 31 },
+      YEARLY: { name: 'CrossMargin Pro 工作室年租版', price: 899, days: 366 }
+    };
+
+    // 綠界金流配置 (測試環境)
+    const ECPAY_ACTION_URL = 'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5';
+    const MERCHANT_ID = '3002607';
+    const HASH_KEY = 'pwFHCqoQZGmho4w6';
+    const HASH_IV = 'EkRm7iFT261dpevs';
+
+    // 自動讀取 URL 參數中的 Email (供續約按鈕一鍵帶入)
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const emailParam = urlParams.get('email');
+      if (emailParam) {
+        document.getElementById('emailInput').value = emailParam;
+      }
+    });
+
+    function selectPlan(plan) {
+      currentPlan = plan;
+      document.getElementById('cardMonthly').classList.toggle('active', plan === 'MONTHLY');
+      document.getElementById('cardYearly').classList.toggle('active', plan === 'YEARLY');
+      document.getElementById('btnPriceText').innerText = plans[plan].price;
+    }
+
+    async function handleCheckout() {
+      const email = document.getElementById('emailInput').value.trim();
+      if (!email || !email.includes('@')) {
+        alert('⚠️ 請輸入有效的電子郵件，以確保能順利收到啟用序號！');
+        document.getElementById('emailInput').focus();
+        return;
+      }
+
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = '⏳ 正在建立綠界安全訂單...';
+
+      try {
+        const planInfo = plans[currentPlan];
+        const tradeNo = 'CMP' + Date.now();
+        const tradeDate = formatTradeDate(new Date());
+
+        // 綠界 AIO 參數
+        const params = {
+          MerchantID: MERCHANT_ID,
+          MerchantTradeNo: tradeNo,
+          MerchantTradeDate: tradeDate,
+          PaymentType: 'aio',
+          TotalAmount: planInfo.price.toString(),
+          TradeDesc: 'CrossMargin Pro Software Subscription',
+          ItemName: planInfo.name,
+          ReturnURL: 'https://script.google.com/macros/s/AKfycbxnDJToTfUBgw5vUbvWdcDOzbGssoIFf34dL9UnGZKkWv8bpwYnbLczIJdvS_q4kpYy/exec', // GAS Webhook
+          ChoosePayment: 'ALL',
+          EncryptType: '1',
+          CustomField1: email,       // 傳遞買家 Email 給 Webhook
+          CustomField2: currentPlan  // 傳遞方案類型
+        };
+
+        if (window.location.protocol.startsWith('http')) {
+          params.ClientBackURL = window.location.href;
+        }
+
+        // 計算 SHA256 CheckMacValue
+        const checkMacValue = await generateCheckMacValue(params, HASH_KEY, HASH_IV);
+        params.CheckMacValue = checkMacValue;
+
+        // 動態生成 Form 並自動提交至綠界收銀台
+        const form = document.getElementById('ecpayForm');
+        form.action = ECPAY_ACTION_URL;
+        form.innerHTML = '';
+        for (const [k, v] of Object.entries(params)) {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = k;
+          input.value = v;
+          form.appendChild(input);
+        }
+
+        form.submit();
+      } catch (err) {
+        alert('建立訂單失敗: ' + err.message);
+        submitBtn.disabled = false;
+        submitBtn.innerText = '🔒 前往綠界科技安全結帳';
+      }
+    }
+
+    function formatTradeDate(d) {
+      const YYYY = d.getFullYear();
+      const MM = String(d.getMonth() + 1).padStart(2, '0');
+      const DD = String(d.getDate()).padStart(2, '0');
+      const HH = String(d.getHours()).padStart(2, '0');
+      const mm = String(d.getMinutes()).padStart(2, '0');
+      const ss = String(d.getSeconds()).padStart(2, '0');
+      return `${YYYY}/${MM}/${DD} ${HH}:${mm}:${ss}`;
+    }
+
+    // 前端純 JavaScript 計算綠界標準 CheckMacValue (SHA256)
+    async function generateCheckMacValue(params, hashKey, hashIV) {
+      const keys = Object.keys(params).sort();
+      let rawStr = `HashKey=${hashKey}`;
+      for (const k of keys) {
+        rawStr += `&${k}=${params[k]}`;
+      }
+      rawStr += `&HashIV=${hashIV}`;
+
+      let encoded = encodeURIComponent(rawStr)
+        .replace(/%2d/gi, '-')
+        .replace(/%5f/gi, '_')
+        .replace(/%2e/gi, '.')
+        .replace(/%21/gi, '!')
+        .replace(/%2a/gi, '*')
+        .replace(/%28/gi, '(')
+        .replace(/%29/gi, ')')
+        .replace(/%20/gi, '+')
+        .toLowerCase();
+
+      // Web Crypto API SHA-256
+      const msgBuffer = new TextEncoder().encode(encoded);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+    }
+  </script>
+</body>
+</html>
