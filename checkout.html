@@ -4,179 +4,373 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CrossMargin Pro - 專業版訂閱與方案續訂</title>
-  <link rel="icon" href="icons/icon48.png" type="image/png">
+  <link rel="icon" href="assets/icon.png" type="image/png">
   <style>
     :root {
       --primary: #2563eb;
-      --primary-dark: #1d4ed8;
+      --primary-hover: #1d4ed8;
+      --primary-light: #3b82f6;
+      --primary-subtle: #eff6ff;
+      --primary-border: #bfdbfe;
       --accent: #10b981;
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --border: #334155;
+      --accent-hover: #059669;
+      
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      
+      --max-width: 1200px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+      --shadow-lg: 0 12px 32px -4px rgba(37, 99, 235, 0.08);
+      --shadow-xl: 0 20px 45px -5px rgba(15, 23, 42, 0.1);
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
+
     body {
       background-color: var(--bg);
-      color: var(--text);
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(219, 234, 254, 0.6) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(209, 250, 229, 0.4) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(239, 246, 255, 0.8) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* Header / Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+      width: 100%;
+    }
+
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+    }
+
+    .brand span {
+      background: linear-gradient(135deg, #1e40af, #2563eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--primary-subtle);
+      color: var(--primary);
+      border: 1px solid var(--primary-border);
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s;
+      padding: 6px 4px;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 24px 16px;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      white-space: nowrap;
     }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: #1e3a8a;
+      border: 1.5px solid #cbd5e1;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-outline:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+      color: #0f172a;
+      transform: translateY(-2px);
+    }
+
+    /* Checkout Page Main Body */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
     .checkout-container {
       width: 100%;
-      max-width: 520px;
+      max-width: 540px;
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px 28px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      border: 1.5px solid #bfdbfe;
+      border-radius: 20px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow-xl);
     }
+
     .brand-header {
       text-align: center;
       margin-bottom: 24px;
     }
+
     .brand-logo {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 800;
-      color: #60a5fa;
+      color: #1e40af;
       margin-bottom: 6px;
     }
+
     .brand-desc {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text-muted);
     }
+
     .plan-selector {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 24px;
     }
+
     .plan-card {
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 14px;
+      border: 2px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 18px 14px;
       cursor: pointer;
       transition: all 0.2s ease;
       position: relative;
-      background: #182234;
+      background: #f8fafc;
       text-align: center;
     }
-    .plan-card.active {
-      border-color: #3b82f6;
-      background: #1e3a8a33;
+
+    .plan-card:hover {
+      border-color: #93c5fd;
+      background: #ffffff;
     }
+
+    .plan-card.active {
+      border-color: #2563eb;
+      background: #eff6ff;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+    }
+
     .plan-badge {
       position: absolute;
       top: -10px;
       right: 10px;
-      background: #dc2626;
+      background: linear-gradient(135deg, #10b981, #059669);
       color: #fff;
-      font-size: 10px;
-      font-weight: bold;
-      padding: 2px 7px;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 2px 8px;
       border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
     }
+
     .plan-title {
       font-size: 15px;
-      font-weight: bold;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-    .plan-price {
-      font-size: 24px;
       font-weight: 800;
-      color: #38bdf8;
+      margin-bottom: 6px;
+      color: #0f172a;
     }
+
+    .plan-price {
+      font-size: 26px;
+      font-weight: 900;
+      color: #1e40af;
+      letter-spacing: -0.5px;
+    }
+
     .plan-unit {
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text-muted);
+      margin-top: 2px;
     }
+
     .plan-detail {
       font-size: 11px;
-      color: #93c5fd;
+      color: #2563eb;
       margin-top: 6px;
-    }
-    .form-group {
-      margin-bottom: 18px;
-    }
-    .form-label {
-      display: block;
-      font-size: 12px;
       font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 6px;
     }
-    .form-input {
-      width: 100%;
-      padding: 12px 14px;
-      background: #0f172a;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .form-input:focus {
-      border-color: #3b82f6;
-    }
+
     .features-list {
-      background: #0f172a88;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 18px;
       margin-bottom: 24px;
     }
+
     .feature-item {
-      font-size: 12px;
-      color: #cbd5e1;
+      font-size: 12.5px;
+      color: #334155;
       display: flex;
       align-items: center;
-      gap: 6px;
-      margin-bottom: 6px;
+      gap: 8px;
+      margin-bottom: 8px;
     }
+
     .feature-item:last-child {
       margin-bottom: 0;
     }
+
+    .feature-item strong {
+      color: #0f172a;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      color: #0f172a;
+      font-size: 15px;
+      font-weight: 600;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      background: #ffffff;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
     .btn-submit {
       width: 100%;
-      padding: 14px;
-      background: #10b981;
+      padding: 15px;
+      background: linear-gradient(135deg, #10b981, #059669);
       color: #ffffff;
       border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: bold;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 800;
       cursor: pointer;
       transition: all 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
     }
+
     .btn-submit:hover {
-      background: #059669;
-      transform: translateY(-1px);
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
     }
+
     .btn-submit:active {
       transform: translateY(0);
     }
+
     .security-notice {
       text-align: center;
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text-muted);
       margin-top: 14px;
       display: flex;
@@ -184,85 +378,149 @@
       justify-content: center;
       gap: 6px;
     }
-    .footer-links {
-      margin-top: 24px;
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #e2e8f0;
+      background: #ffffff;
+      padding: 24px 16px;
       text-align: center;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
     }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
     .footer-links a {
-      color: #60a5fa;
+      color: #2563eb;
       text-decoration: none;
-      margin: 0 6px;
+      font-weight: 600;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+      .checkout-container {
+        padding: 28px 20px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="checkout-container">
-    <div class="brand-header">
-      <div class="brand-logo">
-        <span>⚡ CrossMargin Pro</span>
+  <!-- 頂部保留與官網一致的 Tag 導覽列 -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="brand" title="返回 CrossMargin Pro 官網首頁">
+        <img src="assets/icon.png" alt="CrossMargin Pro Logo">
+        <span>CrossMargin Pro</span>
+        <span class="brand-badge">v1.0.3</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html#features">功能特色</a></li>
+        <li><a href="index.html#comparison">賣家效益</a></li>
+        <li><a href="index.html#demo">線上試算</a></li>
+        <li><a href="index.html#pricing">方案定價</a></li>
+        <li><a href="index.html#changelog">版本紀錄</a></li>
+        <li><a href="index.html#contact">聯絡我們</a></li>
+        <li><a href="index.html#faq">常見問答</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="index.html" class="btn btn-outline" style="font-size: 13px; padding: 8px 14px;">
+          🏠 返回官網首頁
+        </a>
+        <a href="https://chromewebstore.google.com/detail/crossmargin-pro-%E8%B7%A8%E5%A2%83%E9%81%B8%E5%93%81%E5%88%A9%E6%BD%A4%E8%A9%A6%E7%AE%97%E8%88%87/milfgfpcleigidjkocmdadmkfdcmdafd" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 13px; padding: 8px 16px;">
+          🚀 免費安裝
+        </a>
       </div>
-      <div class="brand-desc">台灣跨境代購主與電商賣家必備利潤試算工具</div>
     </div>
+  </header>
 
-    <!-- 方案選擇 -->
-    <div class="plan-selector">
-      <div class="plan-card active" id="cardMonthly" onclick="selectPlan('MONTHLY')">
-        <div class="plan-title">專業月租版</div>
-        <div class="plan-price">NT$ 99</div>
-        <div class="plan-unit">31 天全功能 / 1 台裝置</div>
-        <div class="plan-detail">適合短期代購試水溫</div>
+  <!-- 結帳表單主卡片 -->
+  <div class="main-wrapper">
+    <div class="checkout-container">
+      <div class="brand-header">
+        <div class="brand-logo">
+          <span>⚡ 方案訂閱與授權續訂</span>
+        </div>
+        <div class="brand-desc">台灣跨境代購主與電商賣家必備利潤試算神器</div>
       </div>
 
-      <div class="plan-card" id="cardYearly" onclick="selectPlan('YEARLY')">
-        <span class="plan-badge">省下 NT$ 289</span>
-        <div class="plan-title">工作室年租版</div>
-        <div class="plan-price">NT$ 899</div>
-        <div class="plan-unit">366 天全功能 / 2 台裝置</div>
-        <div class="plan-detail">相當於每月 $75 / 團隊首選</div>
+      <!-- 方案選擇 -->
+      <div class="plan-selector">
+        <div class="plan-card active" id="cardMonthly" onclick="selectPlan('MONTHLY')">
+          <div class="plan-title">專業月租版</div>
+          <div class="plan-price">NT$ 99</div>
+          <div class="plan-unit">31 天全功能 / 1 台裝置</div>
+          <div class="plan-detail">適合短期代購試水溫</div>
+        </div>
+
+        <div class="plan-card" id="cardYearly" onclick="selectPlan('YEARLY')">
+          <span class="plan-badge">立省 NT$ 289</span>
+          <div class="plan-title">工作室年租版</div>
+          <div class="plan-price">NT$ 899</div>
+          <div class="plan-unit">366 天全功能 / 2 台裝置</div>
+          <div class="plan-detail">相當於每月 $75 / 團隊首選</div>
+        </div>
       </div>
-    </div>
 
-    <!-- 權益亮點 -->
-    <div class="features-list">
-      <div class="feature-item">✔ <strong>無限容量選品庫存箱</strong>（突破免費版 3 筆上限）</div>
-      <div class="feature-item">✔ <strong>每日無限制 Excel 進貨單匯出</strong>（附 10 大電商採購欄位）</div>
-      <div class="feature-item">✔ <strong>一鍵無限高清圖影 ZIP 打包下載</strong></div>
-      <div class="feature-item">✔ <strong>自由自訂安全避險匯率 & 社群代購報價單</strong></div>
-    </div>
+      <!-- 權益亮點 -->
+      <div class="features-list">
+        <div class="feature-item">✔ <strong>無限容量選品庫存箱</strong>（突破免費版 3 筆上限）</div>
+        <div class="feature-item">✔ <strong>每日無限制 Excel 進貨單匯出</strong>（附 10 大電商採購標準欄位）</div>
+        <div class="feature-item">✔ <strong>一鍵無限高畫質商品圖影打包下載</strong></div>
+        <div class="feature-item">✔ <strong>自由自訂安全避險匯率 & 社群代購報價文案助手</strong></div>
+      </div>
 
-    <!-- 表單填寫 -->
-    <div class="form-group">
-      <label class="form-label" for="emailInput">買家 Email 電子郵件 (序號將自動寄發至此信箱)：</label>
-      <input type="email" class="form-input" id="emailInput" placeholder="例如：yourname@gmail.com" required>
-    </div>
+      <!-- 表單填寫 -->
+      <div class="form-group">
+        <label class="form-label" for="emailInput">買家 Email 電子郵件 (付款完成後序號將自動發送至此信箱)：</label>
+        <input type="email" class="form-input" id="emailInput" placeholder="例如：yourname@gmail.com" required>
+      </div>
 
-    <div style="margin: -6px 0 16px 0; font-size: 12px; color: #475569; line-height: 1.5; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 10px 12px;">
-      💡 <strong>重要提醒：</strong>付款完成後系統將於數秒內發送 16 碼啟用序號通知信至您的 Email。若在收件匣未看見，請務必查看<strong>「垃圾郵件匣」</strong>或<strong>「促銷內容」</strong>分頁！
-    </div>
+      <div style="margin: -6px 0 16px 0; font-size: 12.5px; color: #475569; line-height: 1.5; background: #eff6ff; border: 1px dashed #bfdbfe; border-radius: 8px; padding: 10px 12px;">
+        💡 <strong>重要提醒：</strong>付款完成後系統將於 10 秒內發送 16 碼啟用序號通知信至您的 Email。若在收件匣未看見，請務必查看<strong>「垃圾郵件匣」</strong>或<strong>「促銷內容」</strong>分頁！
+      </div>
 
-    <button class="btn-submit" id="submitBtn" onclick="handleCheckout()">
-      <span>🔒 前往綠界科技安全結帳 (NT$ <span id="btnPriceText">99</span>)</span>
-    </button>
+      <button class="btn-submit" id="submitBtn" onclick="handleCheckout()">
+        <span>🔒 前往綠界科技安全結帳 (NT$ <span id="btnPriceText">99</span>)</span>
+      </button>
 
-    <div class="security-notice">
-      <span>🛡️ 綠界科技 256-bit SSL 加密安全傳輸・支援台灣信用卡/超商代碼/ATM</span>
+      <div class="security-notice">
+        <span>🛡️ 綠界科技 256-bit SSL 加密安全傳輸・支援台灣信用卡/超商代碼/ATM</span>
+      </div>
     </div>
   </div>
 
-  <div class="footer-links">
-    <a href="PRIVACY_POLICY.md" target="_blank">隱私權政策</a> | 
-    <a href="mailto:crossmarginpro@gmail.com">客服聯繫</a>
-    <div style="margin-top: 4px;">© 2026 CrossMargin Pro. All Rights Reserved.</div>
-  </div>
+  <!-- 頁尾 -->
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">返回官網首頁</a>
+      <span>|</span>
+      <a href="PRIVACY_POLICY.md" target="_blank">隱私權政策</a>
+      <span>|</span>
+      <a href="mailto:crossmarginpro@gmail.com">客服聯繫 (crossmarginpro@gmail.com)</a>
+    </div>
+    <div>© 2026 CrossMargin Pro. All Rights Reserved.</div>
+  </footer>
 
   <!-- 隱藏的綠界 POST 轉發表單 -->
   <form id="ecpayForm" method="POST" action="" style="display:none;"></form>
 
   <script>
-    // 預設選中方案
+    // 預設方案定義
     let currentPlan = 'MONTHLY';
     const plans = {
       MONTHLY: { name: 'CrossMargin Pro 專業月租版', price: 99, days: 31 },
@@ -272,12 +530,21 @@
     // 後端 GAS API 網址 (全自動發貨與安全加密建單中心)
     const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbxnDJToTfUBgw5vUbvWdcDOzbGssoIFf34dL9UnGZKkWv8bpwYnbLczIJdvS_q4kpYy/exec';
 
-    // 自動讀取 URL 參數中的 Email (供續約按鈕一鍵帶入)
+    // 自動讀取 URL 參數 (例如：?plan=yearly & email=xxx@gmail.com)
     window.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const emailParam = urlParams.get('email');
       if (emailParam) {
         document.getElementById('emailInput').value = emailParam;
+      }
+
+      const planParam = urlParams.get('plan');
+      if (planParam) {
+        if (planParam.toUpperCase() === 'YEARLY') {
+          selectPlan('YEARLY');
+        } else if (planParam.toUpperCase() === 'MONTHLY') {
+          selectPlan('MONTHLY');
+        }
       }
     });
 
