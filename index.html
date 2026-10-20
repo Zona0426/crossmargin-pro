@@ -1103,6 +1103,138 @@
       color: var(--text-dim);
     }
 
+    /* Mobile Drawer & Hamburger Menu */
+    .hamburger-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      z-index: 1002;
+    }
+
+    .hamburger-btn:hover {
+      background: #eff6ff;
+      border-color: #93c5fd;
+    }
+
+    .hamburger-btn span {
+      display: block;
+      width: 20px;
+      height: 2.2px;
+      background: #1e293b;
+      border-radius: 2px;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    }
+
+    .hamburger-btn.active span:nth-child(1) {
+      transform: translateY(7.2px) rotate(45deg);
+    }
+    .hamburger-btn.active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .hamburger-btn.active span:nth-child(3) {
+      transform: translateY(-7.2px) rotate(-45deg);
+    }
+
+    .mobile-drawer {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.12);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .mobile-drawer.open {
+      max-height: 85vh;
+      overflow-y: auto;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      z-index: 998;
+    }
+
+    .mobile-menu-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-drawer-inner {
+      padding: 16px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      color: #1e293b;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .mobile-nav-link:hover, .mobile-nav-link:active {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .mobile-drawer-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid #e2e8f0;
+    }
+
     /* Mobile Responsive */
     @media (max-width: 1140px) {
       .nav-links {
@@ -1119,11 +1251,20 @@
     }
 
     @media (max-width: 980px) {
-      .hero-title {
-        font-size: 34px;
+      .hamburger-btn {
+        display: flex;
+      }
+      .mobile-drawer {
+        display: block;
       }
       .nav-links {
-        display: none;
+        display: none !important;
+      }
+      .nav-cta-renew {
+        display: none !important;
+      }
+      .hero-title {
+        font-size: 34px;
       }
       .features-grid {
         grid-template-columns: 1fr;
@@ -1138,13 +1279,156 @@
         gap: 24px;
       }
       .demo-section {
-        padding: 28px 18px;
+        padding: 24px 16px;
       }
       .contact-grid {
         grid-template-columns: 1fr;
       }
       .form-group.full-width {
         grid-column: span 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        padding: 10px 14px;
+      }
+      .brand {
+        font-size: 18px;
+        gap: 8px;
+      }
+      .brand img {
+        width: 30px;
+        height: 30px;
+      }
+      .brand-badge {
+        font-size: 10px;
+        padding: 1px 6px;
+      }
+      .nav-cta-install {
+        padding: 7px 12px !important;
+        font-size: 12.5px !important;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 36px 16px 44px;
+      }
+      .announcement-pill {
+        font-size: 12px;
+        padding: 5px 12px;
+        line-height: 1.4;
+      }
+      .hero-title {
+        font-size: 26px;
+        line-height: 1.35;
+        margin-bottom: 14px;
+      }
+      .hero-desc {
+        font-size: 14.5px;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+      .hero-cta-group {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+      }
+      .hero-cta-group .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 13px 18px;
+        font-size: 15px;
+      }
+      .trust-badges {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+      }
+      .trust-item {
+        width: 100%;
+        justify-content: center;
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+
+      /* Sections */
+      section {
+        padding: 46px 16px;
+      }
+      .section-header {
+        margin-bottom: 28px;
+      }
+      .section-title {
+        font-size: 23px;
+        line-height: 1.35;
+      }
+      .section-desc {
+        font-size: 14px;
+      }
+
+      /* Calculator Demo */
+      .demo-section {
+        padding: 18px 12px;
+        border-radius: 14px;
+      }
+      .demo-input-card, .demo-output-card {
+        padding: 18px 14px;
+      }
+      .demo-field input, .demo-field select {
+        font-size: 16px; /* Prevents auto-zoom in iOS Safari */
+      }
+      .demo-suggest-val {
+        font-size: 26px !important;
+      }
+
+      /* Comparison */
+      .comparison-card {
+        padding: 18px 16px;
+      }
+
+      /* Features */
+      .feature-card {
+        padding: 22px 16px;
+      }
+
+      /* Pricing */
+      .pricing-card {
+        padding: 26px 18px;
+      }
+      .pricing-price {
+        font-size: 32px;
+      }
+
+      /* Contact Form */
+      .contact-container {
+        padding: 22px 16px;
+      }
+      .form-group input, .form-group select, .form-group textarea {
+        font-size: 16px; /* Prevents auto-zoom in iOS Safari */
+      }
+
+      /* Final CTA & Footer */
+      .final-cta {
+        padding: 40px 16px;
+      }
+      .final-cta-title {
+        font-size: 23px;
+      }
+      .final-cta-desc {
+        font-size: 14px;
+      }
+      footer {
+        padding: 36px 16px 24px;
+      }
+      .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .footer-links {
+        flex-direction: column;
+        gap: 12px;
       }
     }
   </style>
@@ -1171,12 +1455,41 @@
       </ul>
 
       <div class="nav-cta">
-        <a href="checkout.html" class="btn btn-outline" style="font-size: 13px; padding: 8px 14px;">
+        <a href="checkout.html" class="btn btn-outline nav-cta-renew" style="font-size: 13px; padding: 8px 14px;">
           🛒 續約/啟用序號
         </a>
-        <a href="https://chromewebstore.google.com/detail/crossmargin-pro-%E8%B7%A8%E5%A2%83%E9%81%B8%E5%93%81%E5%88%A9%E6%BD%A4%E8%A9%A6%E7%AE%97%E8%88%87/milfgfpcleigidjkocmdadmkfdcmdafd" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 13px; padding: 8px 16px;">
+        <a href="https://chromewebstore.google.com/detail/crossmargin-pro-%E8%B7%A8%E5%A2%83%E9%81%B8%E5%93%81%E5%88%A9%E6%BD%A4%E8%A9%A6%E7%AE%97%E8%88%87/milfgfpcleigidjkocmdadmkfdcmdafd" target="_blank" rel="noopener noreferrer" class="btn btn-primary nav-cta-install" style="font-size: 13px; padding: 8px 16px;">
           🚀 免費安裝
         </a>
+        <button class="hamburger-btn" id="mobileMenuBtn" aria-label="切換導覽選單" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 移動端滑出選單與遮罩 -->
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+      <div class="mobile-drawer-inner">
+        <ul class="mobile-nav-links">
+          <li><a href="#features" class="mobile-nav-link"><span>✨</span> 功能特色</a></li>
+          <li><a href="#comparison" class="mobile-nav-link"><span>📈</span> 賣家效益</a></li>
+          <li><a href="#demo" class="mobile-nav-link"><span>⚡</span> 線上試算</a></li>
+          <li><a href="#pricing" class="mobile-nav-link"><span>💰</span> 方案定價</a></li>
+          <li><a href="changelog.html" class="mobile-nav-link"><span>📋</span> 版本紀錄</a></li>
+          <li><a href="#contact" class="mobile-nav-link"><span>📮</span> 聯絡我們</a></li>
+          <li><a href="#faq" class="mobile-nav-link"><span>❓</span> 常見問答</a></li>
+        </ul>
+        <div class="mobile-drawer-cta">
+          <a href="checkout.html" class="btn btn-outline" style="width: 100%; justify-content: center; padding: 12px; font-size: 14px;">
+            🛒 續約 / 啟用序號
+          </a>
+          <a href="https://chromewebstore.google.com/detail/crossmargin-pro-%E8%B7%A8%E5%A2%83%E9%81%B8%E5%93%81%E5%88%A9%E6%BD%A4%E8%A9%A6%E7%AE%97%E8%88%87/milfgfpcleigidjkocmdadmkfdcmdafd" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px; font-size: 14px;">
+            🚀 免費安裝 Chrome 擴充功能
+          </a>
+        </div>
       </div>
     </div>
   </header>
@@ -1859,6 +2172,46 @@
         submitBtn.innerHTML = '<span>📤 立即送出回報</span>';
       }
     }
+
+    // 移動端漢堡選單開關邏輯
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    function toggleMobileMenu() {
+      const isOpen = mobileDrawer.classList.contains('open');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    }
+
+    function openMobileMenu() {
+      mobileDrawer.classList.add('open');
+      mobileOverlay.classList.add('open');
+      mobileMenuBtn.classList.add('active');
+      mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMobileMenu() {
+      mobileDrawer.classList.remove('open');
+      mobileOverlay.classList.remove('open');
+      mobileMenuBtn.classList.remove('active');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    }
+    if (mobileOverlay) {
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // 點擊移動端選單任一項目時自動收合選單
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
   </script>
 </body>
 </html>
