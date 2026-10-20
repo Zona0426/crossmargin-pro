@@ -203,7 +203,7 @@
     .checkout-container {
       width: 100%;
       max-width: 540px;
-      background: var(--card-bg);
+      background: #ffffff;
       border: 1.5px solid #bfdbfe;
       border-radius: 20px;
       padding: 36px 32px;
@@ -215,19 +215,32 @@
       margin-bottom: 24px;
     }
 
-    .brand-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 22px;
+    .page-tag {
+      font-size: 11.5px;
       font-weight: 800;
-      color: #1e40af;
-      margin-bottom: 6px;
+      color: #0284c7;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      display: inline-block;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+
+    .brand-title {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #0f172a;
+      margin-bottom: 8px;
     }
 
     .brand-desc {
       font-size: 13.5px;
       color: var(--text-muted);
+      line-height: 1.5;
     }
 
     .plan-selector {
@@ -244,32 +257,34 @@
       cursor: pointer;
       transition: all 0.2s ease;
       position: relative;
-      background: #f8fafc;
+      background: #ffffff;
       text-align: center;
+      box-shadow: var(--shadow-sm);
     }
 
     .plan-card:hover {
       border-color: #93c5fd;
-      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
     .plan-card.active {
-      border-color: #2563eb;
-      background: #eff6ff;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+      border: 2px solid #2563eb;
+      background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);
+      box-shadow: 0 4px 18px rgba(37, 99, 235, 0.16);
     }
 
     .plan-badge {
       position: absolute;
-      top: -10px;
+      top: -11px;
       right: 10px;
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: linear-gradient(135deg, #2563eb, #0284c7);
       color: #fff;
       font-size: 10.5px;
       font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+      padding: 3px 10px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.28);
     }
 
     .plan-title {
@@ -280,9 +295,9 @@
     }
 
     .plan-price {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 900;
-      color: #1e40af;
+      color: #0f172a;
       letter-spacing: -0.5px;
     }
 
@@ -293,31 +308,39 @@
     }
 
     .plan-detail {
-      font-size: 11px;
+      font-size: 11.5px;
       color: #2563eb;
       margin-top: 6px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .features-list {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 16px 18px;
+      background: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      border-radius: 14px;
+      padding: 18px 20px;
       margin-bottom: 24px;
     }
 
     .feature-item {
-      font-size: 12.5px;
-      color: #334155;
+      font-size: 13px;
+      color: #1e293b;
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
+      gap: 10px;
+      margin-bottom: 10px;
+      line-height: 1.4;
     }
 
     .feature-item:last-child {
       margin-bottom: 0;
+    }
+
+    .feature-check {
+      color: #2563eb;
+      font-weight: 900;
+      font-size: 14px;
+      flex-shrink: 0;
     }
 
     .feature-item strong {
@@ -330,9 +353,9 @@
 
     .form-label {
       display: block;
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 700;
-      color: #334155;
+      color: #1e293b;
       margin-bottom: 8px;
     }
 
@@ -358,25 +381,25 @@
     .btn-submit {
       width: 100%;
       padding: 15px;
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: #ffffff;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 16px;
       font-weight: 800;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
     }
 
     .btn-submit:hover {
-      background: linear-gradient(135deg, #059669, #047857);
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
     }
 
     .btn-submit:active {
@@ -385,7 +408,7 @@
 
     .security-notice {
       text-align: center;
-      font-size: 11.5px;
+      font-size: 12px;
       color: var(--text-muted);
       margin-top: 14px;
       display: flex;
@@ -553,6 +576,10 @@
       border-top: 1px solid #e2e8f0;
     }
 
+    .nav-cta-mobile-home {
+      display: none !important;
+    }
+
     @media (max-width: 1140px) {
       .nav-links {
         gap: 10px;
@@ -580,6 +607,12 @@
       .nav-cta-home {
         display: none !important;
       }
+      .nav-cta-install {
+        display: none !important;
+      }
+      .nav-cta-mobile-home {
+        display: inline-flex !important;
+      }
       .checkout-container {
         padding: 28px 20px;
       }
@@ -601,7 +634,7 @@
         font-size: 10px;
         padding: 1px 6px;
       }
-      .nav-cta-install {
+      .nav-cta-mobile-home {
         padding: 7px 12px !important;
         font-size: 12.5px !important;
       }
@@ -612,8 +645,8 @@
         padding: 22px 16px;
         border-radius: 16px;
       }
-      .brand-logo {
-        font-size: 19px;
+      .brand-title {
+        font-size: 21px;
       }
       .plan-selector {
         gap: 10px;
@@ -625,7 +658,7 @@
         font-size: 14px;
       }
       .plan-price {
-        font-size: 22px;
+        font-size: 24px;
       }
       .form-input {
         font-size: 16px; /* Prevents auto-zoom in iOS Safari */
@@ -672,6 +705,9 @@
         <a href="https://chromewebstore.google.com/detail/crossmargin-pro-%E8%B7%A8%E5%A2%83%E9%81%B8%E5%93%81%E5%88%A9%E6%BD%A4%E8%A9%A6%E7%AE%97%E8%88%87/milfgfpcleigidjkocmdadmkfdcmdafd" target="_blank" rel="noopener noreferrer" class="btn btn-primary nav-cta-install" style="font-size: 13px; padding: 8px 16px;">
           🚀 免費安裝
         </a>
+        <a href="index.html" class="btn btn-outline nav-cta-mobile-home" style="font-size: 12.5px; padding: 7px 12px;">
+          🏠 官網首頁
+        </a>
         <button class="hamburger-btn" id="mobileMenuBtn" aria-label="切換導覽選單" aria-expanded="false">
           <span></span>
           <span></span>
@@ -710,10 +746,9 @@
   <div class="main-wrapper">
     <div class="checkout-container">
       <div class="brand-header">
-        <div class="brand-logo">
-          <span>⚡ 方案訂閱與授權續訂</span>
-        </div>
-        <div class="brand-desc">台灣跨境代購主與電商賣家必備利潤試算神器</div>
+        <span class="page-tag">OFFICIAL CHECKOUT</span>
+        <h1 class="brand-title">升級 CrossMargin Pro 專業版</h1>
+        <p class="brand-desc">一次解鎖無限選品庫存箱、Excel 匯出與圖影批量下載，系統秒級派發啟用序號！</p>
       </div>
 
       <!-- 方案選擇 -->
@@ -736,10 +771,10 @@
 
       <!-- 權益亮點 -->
       <div class="features-list">
-        <div class="feature-item">✔ <strong>無限容量選品庫存箱</strong>（突破免費版 3 筆上限）</div>
-        <div class="feature-item">✔ <strong>每日無限制 Excel 進貨單匯出</strong>（附 10 大電商採購標準欄位）</div>
-        <div class="feature-item">✔ <strong>一鍵無限高畫質商品圖影打包下載</strong></div>
-        <div class="feature-item">✔ <strong>自由自訂安全避險匯率 & 社群代購報價文案助手</strong></div>
+        <div class="feature-item"><span class="feature-check">✔</span> <span><strong>無限容量選品庫存箱</strong>（突破免費版 3 筆上限）</span></div>
+        <div class="feature-item"><span class="feature-check">✔</span> <span><strong>每日無限制 Excel 進貨單匯出</strong>（附 10 大電商採購標準欄位）</span></div>
+        <div class="feature-item"><span class="feature-check">✔</span> <span><strong>一鍵無限高畫質商品圖影打包下載</strong></span></div>
+        <div class="feature-item"><span class="feature-check">✔</span> <span><strong>自由自訂安全避險匯率 & 社群代購報價文案助手</strong></span></div>
       </div>
 
       <!-- 表單填寫 -->
@@ -748,7 +783,7 @@
         <input type="email" class="form-input" id="emailInput" placeholder="例如：yourname@gmail.com" required>
       </div>
 
-      <div style="margin: -6px 0 16px 0; font-size: 12.5px; color: #475569; line-height: 1.5; background: #eff6ff; border: 1px dashed #bfdbfe; border-radius: 8px; padding: 10px 12px;">
+      <div style="margin: -6px 0 18px 0; font-size: 12.5px; color: #1e40af; line-height: 1.6; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 12px 14px;">
         💡 <strong>重要提醒：</strong>付款完成後系統將於 10 秒內發送 16 碼啟用序號通知信至您的 Email。若在收件匣未看見，請務必查看<strong>「垃圾郵件匣」</strong>或<strong>「促銷內容」</strong>分頁！
       </div>
 
