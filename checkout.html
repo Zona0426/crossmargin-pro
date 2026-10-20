@@ -444,6 +444,65 @@
       text-decoration: underline;
     }
 
+    .footer-social-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #334155;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .social-btn svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    }
+
+    .social-btn.social-ig {
+      color: #e1306c;
+      border-color: #fbcfe8;
+      background: #fdf2f8;
+    }
+
+    .social-btn.social-ig:hover {
+      background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+      border-color: #f472b6;
+      color: #be185d;
+    }
+
+    .social-btn.social-threads {
+      color: #0f172a;
+      border-color: #cbd5e1;
+      background: #f8fafc;
+    }
+
+    .social-btn.social-threads:hover {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+
     /* Mobile Drawer & Hamburger Menu */
     .hamburger-btn {
       display: none;
@@ -807,6 +866,16 @@
       <a href="PRIVACY_POLICY.md" target="_blank">隱私權政策</a>
       <span>|</span>
       <a href="mailto:crossmarginpro@gmail.com">客服聯繫 (crossmarginpro@gmail.com)</a>
+    </div>
+    <div class="footer-social-links" style="justify-content: center; margin: 16px auto 14px;">
+      <a href="https://www.instagram.com/crossmargin_pro?obrf=anl6ZHI2eGQzajB6&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-btn social-ig" title="追蹤 CrossMargin Pro 官方 Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        <span>Instagram</span>
+      </a>
+      <a href="https://www.threads.com/@crossmargin_pro?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="social-btn social-threads" title="追蹤 CrossMargin Pro 官方 Threads">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.26 18.305 1.5 15.374 1.5 11.83 1.5 5.56 6.095.034 12.385 0h.014c3.425.018 6.177 1.157 8.181 3.385 1.944 2.161 2.92 5.097 2.92 8.724 0 .543-.027 1.104-.082 1.668-.13 1.341-.54 2.378-1.22 3.083-.75.776-1.785 1.196-2.99 1.213-.03 0-.06 0-.09-.002-1.365-.03-2.457-.54-3.245-1.516-.622.955-1.573 1.638-2.75 1.977-.478.138-.985.207-1.508.207-2.613 0-4.524-1.637-4.524-4.238 0-2.67 2.03-4.394 4.935-4.394.945 0 1.776.155 2.502.465.006-1.547-.394-2.628-1.215-3.298-.748-.611-1.84-.925-3.245-.933h-.012c-1.39.008-2.476.324-3.23.94-.658.537-1.025 1.328-1.124 2.417h-2.15c.119-1.677.747-2.952 1.866-3.791 1.225-.918 2.87-1.393 4.887-1.411h.016c1.996.012 3.567.487 4.673 1.412 1.144.956 1.737 2.457 1.761 4.46v5.828c.451.587 1.05.9 1.781.933h.047c.69-.011 1.258-.239 1.642-.66.425-.466.685-1.178.775-2.115.048-.5.072-.999.072-1.482 0-3.21-.836-5.748-2.485-7.545C17.067 2.062 14.73 1.05 11.83 1.036h-.012C6.914 1.066 3.05 5.578 3.05 11.267c0 3.25.688 5.86 2.046 7.756 1.555 2.17 3.896 3.167 6.963 3.187h.006c2.378-.016 4.34-.64 5.832-1.854.341-.277.842-.23 1.119.111.277.341.23.842-.111 1.119-1.782 1.45-4.116 2.195-6.94 2.213zm-1.01-6.953c-1.82 0-3.056 1.055-3.056 2.496 0 1.44 1.236 2.416 3.056 2.416.4 0 .783-.056 1.14-.165.867-.265 1.554-.836 1.935-1.609-.07-.905-.333-1.668-.781-2.27-.47-.63-1.24-.868-2.294-.868z"/></svg>
+        <span>Threads</span>
+      </a>
     </div>
     <div>© 2026 CrossMargin Pro. All Rights Reserved.</div>
   </footer>
