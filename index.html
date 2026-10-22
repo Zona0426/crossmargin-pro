@@ -572,15 +572,15 @@
     /* Features Grid */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
 
     .feature-card {
       background: #ffffff;
       border: 1px solid var(--card-border);
       border-radius: 18px;
-      padding: 32px;
+      padding: 28px 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -609,14 +609,14 @@
     }
 
     .feature-title {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
       margin-bottom: 10px;
       color: #0f172a;
     }
 
     .feature-desc {
-      font-size: 14.5px;
+      font-size: 14px;
       color: var(--text-muted);
       line-height: 1.6;
       margin-bottom: 22px;
@@ -625,13 +625,18 @@
     .feature-img-wrapper {
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid #cbd5e1;
-      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .feature-img-wrapper img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: contain;
       display: block;
       transition: transform 0.3s;
     }
@@ -1790,7 +1795,7 @@
     <div class="section-header">
       <span class="section-tag">CORE CAPABILITIES</span>
       <h2 class="section-title">全方位跨境選品與利潤管理引擎</h2>
-      <p class="section-desc">從商品辨識、運費匯率精算，到選品庫存箱批量匯出，一氣呵成。</p>
+      <p class="section-desc">從商品規格即時辨識、台幣在地化運費匯率精算，到平台抽成與保本售價逆算，一氣呵成。</p>
     </div>
 
     <div class="features-grid">
@@ -1804,7 +1809,7 @@
           </p>
         </div>
         <div class="feature-img-wrapper">
-          <img src="assets/screenshot-calc.png" alt="智慧動態監聽">
+          <img src="assets/screenshot-calc.png" alt="智慧動態監聽與規格切換">
         </div>
       </div>
 
@@ -1833,20 +1838,6 @@
         </div>
         <div class="feature-img-wrapper">
           <img src="assets/screenshot-profit.png" alt="售價逆算保本">
-        </div>
-      </div>
-
-      <!-- Feature 4 -->
-      <div class="feature-card">
-        <div>
-          <div class="feature-icon-badge">📥</div>
-          <h3 class="feature-title">選品暫存抽屜 & 一鍵匯出 Excel</h3>
-          <p class="feature-desc">
-            逛到潛力爆品一鍵加入庫存箱，像購物車一樣隨心暫存與多款商品利潤對比。更支援一鍵導出具備中文欄位與公式的完整 Excel (.xlsx) 報表！
-          </p>
-        </div>
-        <div class="feature-img-wrapper">
-          <img src="assets/screenshot-drawer.png" alt="選品庫存箱">
         </div>
       </div>
     </div>
