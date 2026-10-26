@@ -650,29 +650,34 @@
       position: relative;
     }
 
-    .showcase-triptych {
-      display: grid;
-      grid-template-columns: 1fr 370px 1fr;
-      gap: 28px;
-      align-items: stretch;
-    }
-
-    .showcase-card {
+    .showcase-box {
       background: #ffffff;
       border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 32px 26px;
+      border-radius: 24px;
+      padding: 36px 32px;
       box-shadow: var(--shadow-md);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 1fr 340px 1fr;
+      gap: 36px;
+      align-items: start;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .showcase-card:hover {
-      border-color: #60a5fa;
-      transform: translateY(-4px);
+    .showcase-box:hover {
+      border-color: #93c5fd;
       box-shadow: var(--shadow-lg);
+    }
+
+    .showcase-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .showcase-col-center {
+      align-items: center;
+      justify-content: center;
+      align-self: center;
+      gap: 14px;
     }
 
     .showcase-badge {
@@ -686,7 +691,7 @@
       border: 1px solid #dbeafe;
       padding: 4px 12px;
       border-radius: 9999px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       width: fit-content;
     }
 
@@ -695,14 +700,14 @@
       font-weight: 700;
       color: var(--text-primary);
       line-height: 1.45;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .showcase-desc {
-      font-size: 14px;
+      font-size: 13.5px;
       color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 20px;
+      line-height: 1.65;
+      margin-bottom: 18px;
     }
 
     .showcase-points {
@@ -711,13 +716,13 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .showcase-points li {
-      font-size: 13.5px;
+      font-size: 13px;
       color: #334155;
-      line-height: 1.6;
+      line-height: 1.55;
       display: flex;
       align-items: flex-start;
       gap: 10px;
@@ -727,40 +732,27 @@
       flex-shrink: 0;
       color: #2563eb;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14px;
       margin-top: 1px;
-    }
-
-    .showcase-center {
-      background: #ffffff;
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 22px;
-      box-shadow: var(--shadow-md);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .showcase-center:hover {
-      border-color: #60a5fa;
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
     }
 
     .showcase-img-box {
       width: 100%;
+      max-width: 320px;
       aspect-ratio: 1 / 1;
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
       background: #ffffff;
-      border: 1px solid #f1f5f9;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06);
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: transform 0.3s;
+    }
+
+    .showcase-img-box:hover {
+      transform: scale(1.02);
     }
 
     .showcase-img-box img {
@@ -768,15 +760,10 @@
       height: 100%;
       object-fit: contain;
       display: block;
-      transition: transform 0.3s;
-    }
-
-    .showcase-center:hover .showcase-img-box img {
-      transform: scale(1.02);
     }
 
     .showcase-caption {
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 600;
       color: #64748b;
       text-align: center;
@@ -785,14 +772,15 @@
       border-radius: 9999px;
       border: 1px solid #e2e8f0;
       width: 100%;
+      max-width: 320px;
     }
 
     .excel-fields-card {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 12px;
-      padding: 14px;
-      margin: 16px 0;
+      padding: 12px 14px;
+      margin: 4px 0 16px 0;
     }
 
     .excel-fields-card-title {
@@ -808,18 +796,18 @@
     .excel-tags-wrap {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 5px;
     }
 
     .excel-tag {
       display: inline-block;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 500;
       color: #1e293b;
       background: #ffffff;
       border: 1px solid #cbd5e1;
       border-radius: 6px;
-      padding: 3px 8px;
+      padding: 2.5px 7px;
     }
 
     /* Pricing Section */
@@ -1520,14 +1508,16 @@
       .features-grid {
         grid-template-columns: 1fr;
       }
-      .showcase-triptych {
+      .showcase-box {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 32px;
+        padding: 28px 20px;
       }
-      .showcase-center {
-        max-width: 420px;
+      .showcase-col-center {
         width: 100%;
-        margin: 0 auto;
+      }
+      .showcase-img-box, .showcase-caption {
+        max-width: 320px;
       }
       .pricing-grid {
         grid-template-columns: 1fr;
@@ -1669,11 +1659,10 @@
       .feature-card {
         padding: 22px 16px;
       }
-      .showcase-card {
-        padding: 22px 18px;
-      }
-      .showcase-center {
-        padding: 18px;
+      .showcase-box {
+        padding: 24px 16px;
+        border-radius: 18px;
+        gap: 26px;
       }
 
       /* Pricing */
@@ -2043,38 +2032,36 @@
       <p class="section-desc">從跨站探索商品到一鍵生成供貨商叫貨單，打造一體化無縫跨境工作流。</p>
     </div>
 
-    <div class="showcase-triptych">
+    <div class="showcase-box">
       <!-- Left: 跨網站儲存不同品類 -->
-      <div class="showcase-card">
-        <div>
-          <span class="showcase-badge">🌐 跨站多元品類暫存</span>
-          <h3 class="showcase-title">打破單一電商限制<br>跨平台隨選隨存自由比價</h3>
-          <p class="showcase-desc">
-            支援在 1688、淘寶、天貓與日本亞馬遜不同貨源網站間自由切換選品。無需受限於單一賣場，將多個網站、不同供應商、多種規格品類的商品一鍵收納進專屬暫存抽屜。
-          </p>
-          <ul class="showcase-points">
-            <li>
-              <span class="point-icon">✓</span>
-              <div><strong>跨電商平台無縫整合：</strong>逛 1688 服飾、看淘寶五金、比日本亞馬遜文創，全部集中在同一個外掛抽屜，免開數十個分頁記憶。</div>
-            </li>
-            <li>
-              <span class="point-icon">✓</span>
-              <div><strong>支援多品類統一對比：</strong>不同規格 SKU、批量級距即時暫存，像購物車一樣隨時檢視與刪減，快速篩選出最高毛利的爆款組合。</div>
-            </li>
-            <li>
-              <span class="point-icon">✓</span>
-              <div><strong>自動記憶商品來源與參數：</strong>暫存即自動綁定原始商品網址、規格型號、進貨原幣與即時換算台幣成本，日後隨時點擊回訪廠商。</div>
-            </li>
-            <li>
-              <span class="point-icon">✓</span>
-              <div><strong>社群代購一鍵複製：</strong>專為團購與代購賣家設計，可一鍵複製格式化文案（品名、規格、報價），免打字直接貼到 LINE 社群或 IG 發文。</div>
-            </li>
-          </ul>
-        </div>
+      <div class="showcase-col showcase-col-left">
+        <span class="showcase-badge">🌐 跨站多元品類暫存</span>
+        <h3 class="showcase-title">打破單一電商限制<br>跨平台隨選隨存自由比價</h3>
+        <p class="showcase-desc">
+          支援在 1688、淘寶、天貓與日本亞馬遜不同貨源網站間自由切換選品。無需受限於單一賣場，將多個網站、不同供應商、多種規格品類的商品一鍵收納進專屬暫存抽屜。
+        </p>
+        <ul class="showcase-points">
+          <li>
+            <span class="point-icon">✓</span>
+            <div><strong>跨電商平台無縫整合：</strong>逛 1688 服飾、看淘寶五金、比日本亞馬遜文創，全部集中在同一個外掛抽屜，免開數十個分頁記憶。</div>
+          </li>
+          <li>
+            <span class="point-icon">✓</span>
+            <div><strong>支援多品類統一對比：</strong>不同規格 SKU、批量級距即時暫存，像購物車一樣隨時檢視與刪減，快速篩選出最高毛利的爆款組合。</div>
+          </li>
+          <li>
+            <span class="point-icon">✓</span>
+            <div><strong>自動記憶商品來源與參數：</strong>暫存即自動綁定原始商品網址、規格型號、進貨原幣與即時換算台幣成本，日後隨時點擊回訪廠商。</div>
+          </li>
+          <li>
+            <span class="point-icon">✓</span>
+            <div><strong>社群代購一鍵複製：</strong>專為團購與代購賣家設計，可一鍵複製格式化文案（品名、規格、報價），免打字直接貼到 LINE 社群或 IG 發文。</div>
+          </li>
+        </ul>
       </div>
 
       <!-- Center: 1:1 正方形處理後的商品圖片 -->
-      <div class="showcase-center">
+      <div class="showcase-col showcase-col-center">
         <div class="showcase-img-box">
           <img src="assets/screenshot-drawer.png" alt="選品庫存箱暫存抽屜與一鍵匯出 Excel">
         </div>
@@ -2084,46 +2071,49 @@
       </div>
 
       <!-- Right: Excel 包含欄位、叫貨單與庫存管理 -->
-      <div class="showcase-card">
-        <div>
-          <span class="showcase-badge">📊 專業級 EXCEL 報表匯出</span>
-          <h3 class="showcase-title">完整參數一次產出<br>即時化身採購叫貨單與庫存損益表</h3>
-          <p class="showcase-desc">
-            選品完成後，只需輕點「匯出 Excel 報表」，即可秒級生成結構化標準試算表，省去人工逐筆抄寫複製的繁瑣工時。
-          </p>
+      <div class="showcase-col showcase-col-right">
+        <span class="showcase-badge">📊 專業級 EXCEL 報表匯出</span>
+        <h3 class="showcase-title">完整參數一次產出<br>即時化身採購叫貨單與庫存損益表</h3>
 
-          <div class="excel-fields-card">
-            <div class="excel-fields-card-title">
-              <span>📋 匯出報表完整包含以下專業欄位：</span>
-            </div>
-            <div class="excel-tags-wrap">
-              <span class="excel-tag">🏷️ 商品名稱</span>
-              <span class="excel-tag">📐 規格/款式標籤</span>
-              <span class="excel-tag">🔗 商品來源直達網址</span>
-              <span class="excel-tag">🔢 採購數量</span>
-              <span class="excel-tag">💰 進貨原幣單價</span>
-              <span class="excel-tag">💱 即時牌價匯率</span>
-              <span class="excel-tag">💵 折合台幣進貨價</span>
-              <span class="excel-tag">✈️ 國際運費與包材費</span>
-              <span class="excel-tag">🎯 台灣落地總成本</span>
-              <span class="excel-tag">🏪 通路抽成費率</span>
-              <span class="excel-tag">🛡️ 零毛利保本售價</span>
-              <span class="excel-tag">🏷️ 建議刊登售價</span>
-              <span class="excel-tag">📈 預估實質淨毛利</span>
-            </div>
+        <div class="excel-fields-card">
+          <div class="excel-fields-card-title">
+            <span>📋 匯出報表完整包含以下 21 項標準欄位：</span>
           </div>
-
-          <ul class="showcase-points">
-            <li>
-              <span class="point-icon">✓</span>
-              <div><strong>廠商與集運「採購叫貨單」：</strong>欄位清晰標註商品規格與來源連結，可直接當作採購清單發給集運商驗貨或發給廠商下單。</div>
-            </li>
-            <li>
-              <span class="point-icon">✓</span>
-              <div><strong>賣家營運「庫存損益管理表」：</strong>掌握批發進貨總金額、預估利潤與損益平衡點，讓跨境電商進銷存管理井井有條。</div>
-            </li>
-          </ul>
+          <div class="excel-tags-wrap">
+            <span class="excel-tag">編號</span>
+            <span class="excel-tag">商品標題</span>
+            <span class="excel-tag">選取規格/款式</span>
+            <span class="excel-tag">商品數量</span>
+            <span class="excel-tag">原幣幣別</span>
+            <span class="excel-tag">進貨原價</span>
+            <span class="excel-tag">換算匯率</span>
+            <span class="excel-tag">台幣本金(NT$)</span>
+            <span class="excel-tag">運費模式</span>
+            <span class="excel-tag">預估重量(kg)</span>
+            <span class="excel-tag">國際運費(NT$)</span>
+            <span class="excel-tag">海外刷卡手續費(NT$)</span>
+            <span class="excel-tag">包材與雜費(NT$)</span>
+            <span class="excel-tag">台灣落地總成本(NT$)</span>
+            <span class="excel-tag">通路抽成率(%)</span>
+            <span class="excel-tag">目標毛利率(%)</span>
+            <span class="excel-tag">保本售價(NT$)</span>
+            <span class="excel-tag">建議售價(NT$)</span>
+            <span class="excel-tag">預估淨利(NT$)</span>
+            <span class="excel-tag">商品原創連結</span>
+            <span class="excel-tag">建立時間</span>
+          </div>
         </div>
+
+        <ul class="showcase-points">
+          <li>
+            <span class="point-icon">✓</span>
+            <div><strong>廠商與集運「採購叫貨單」：</strong>欄位清晰標註商品規格與來源連結，可直接當作採購清單發給集運商驗貨或發給廠商下單。</div>
+          </li>
+          <li>
+            <span class="point-icon">✓</span>
+            <div><strong>賣家營運「庫存損益管理表」：</strong>掌握批發進貨總金額、預估利潤與損益平衡點，讓跨境電商進銷存管理井井有條。</div>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
