@@ -842,6 +842,21 @@
         <input type="email" class="form-input" id="emailInput" placeholder="例如：yourname@gmail.com" required>
       </div>
 
+      <!-- 優惠折扣碼輸入區 -->
+      <div class="form-group" style="margin-bottom: 14px;">
+        <label class="form-label" for="couponInput" style="display: flex; justify-content: space-between; align-items: center;">
+          <span>🏷️ 優惠折扣碼 (選填)：</span>
+          <span id="couponStatusBadge" style="display: none; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 6px;"></span>
+        </label>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" class="form-input" id="couponInput" placeholder="例如：YEAR100" style="text-transform: uppercase; font-family: monospace; letter-spacing: 0.5px;">
+          <button type="button" id="applyCouponBtn" onclick="applyCoupon()" style="padding: 0 18px; background: #3b82f6; color: #ffffff; border: none; border-radius: 10px; font-weight: 700; font-size: 13.5px; cursor: pointer; white-space: nowrap; transition: all 0.2s;">
+            套用
+          </button>
+        </div>
+        <div id="couponMsg" style="display: none; font-size: 12.5px; margin-top: 6px; line-height: 1.5;"></div>
+      </div>
+
       <div style="margin: -6px 0 18px 0; font-size: 12.5px; color: #1e40af; line-height: 1.6; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 12px 14px;">
         💡 <strong>重要提醒：</strong>付款完成後系統將於 10 秒內發送 16 碼啟用序號通知信至您的 Email。若在收件匣未看見，請務必查看<strong>「垃圾郵件匣」</strong>或<strong>「促銷內容」</strong>分頁！
       </div>
@@ -900,6 +915,8 @@
   <script>
     // 預設方案定義
     let currentPlan = 'MONTHLY';
+    let activeCoupon = null; // 當前套用之折扣碼資料 { code, discount, ... }
+
     const plans = {
       MONTHLY: { name: 'CrossMargin Pro 專業月租版', price: 99, days: 31 },
       YEARLY: { name: 'CrossMargin Pro 工作室年租版', price: 899, days: 366 }
@@ -908,7 +925,7 @@
     // 後端 GAS API 網址 (全自動發貨與安全加密建單中心)
     const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbxnDJToTfUBgw5vUbvWdcDOzbGssoIFf34dL9UnGZKkWv8bpwYnbLczIJdvS_q4kpYy/exec';
 
-    // 自動讀取 URL 參數 (例如：?plan=yearly & email=xxx@gmail.com)
+    // 自動讀取 URL 參數 (例如：?plan=yearly & email=xxx@gmail.com & coupon=YEAR100)
     window.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const emailParam = urlParams.get('email');
@@ -924,13 +941,133 @@
           selectPlan('MONTHLY');
         }
       }
+
+      const couponParam = urlParams.get('coupon');
+      if (couponParam) {
+        document.getElementById('couponInput').value = couponParam.trim().toUpperCase();
+        applyCoupon();
+      }
     });
+
+    function getPayablePrice() {
+      const basePrice = plans[currentPlan].price;
+      if (activeCoupon && activeCoupon.discount > 0) {
+        return Math.max(1, basePrice - activeCoupon.discount);
+      }
+      return basePrice;
+    }
 
     function selectPlan(plan) {
       currentPlan = plan;
       document.getElementById('cardMonthly').classList.toggle('active', plan === 'MONTHLY');
       document.getElementById('cardYearly').classList.toggle('active', plan === 'YEARLY');
-      document.getElementById('btnPriceText').innerText = plans[plan].price;
+      
+      // 切換方案時若原折扣碼限制僅年租使用，需重新驗證或重置
+      if (activeCoupon && activeCoupon.targetPlan && activeCoupon.targetPlan !== 'ALL' && activeCoupon.targetPlan !== plan) {
+        resetCoupon('方案變更，已取消適用於其他方案的折扣碼');
+      } else {
+        updatePriceDisplay();
+      }
+    }
+
+    function updatePriceDisplay() {
+      const finalPrice = getPayablePrice();
+      document.getElementById('btnPriceText').innerText = finalPrice;
+    }
+
+    // 驗證與套用折扣碼
+    async function applyCoupon() {
+      const codeInput = document.getElementById('couponInput');
+      const code = (codeInput.value || '').trim().toUpperCase();
+      const msgEl = document.getElementById('couponMsg');
+      const badgeEl = document.getElementById('couponStatusBadge');
+      const applyBtn = document.getElementById('applyCouponBtn');
+
+      if (!code) {
+        resetCoupon('請輸入折扣代碼');
+        return;
+      }
+
+      applyBtn.disabled = true;
+      applyBtn.innerText = '驗證中...';
+      msgEl.style.display = 'block';
+      msgEl.style.color = '#64748b';
+      msgEl.innerText = '正在向伺服器查詢折扣碼...';
+
+      try {
+        const url = `${GAS_API_URL}?action=validate_coupon&coupon=${encodeURIComponent(code)}&plan=${encodeURIComponent(currentPlan)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data && data.valid) {
+          if (data.type === 'TRIAL') {
+            msgEl.style.color = '#0284c7';
+            msgEl.innerText = `💡 這是「${data.trialDays || 7} 天免費試用碼」！請直接在 Chrome 外掛視窗內輸入即可立即啟用，無需在此付費結帳。`;
+            badgeEl.style.display = 'inline-block';
+            badgeEl.style.background = '#e0f2fe';
+            badgeEl.style.color = '#0369a1';
+            badgeEl.innerText = '免費試用碼';
+            activeCoupon = null;
+          } else {
+            activeCoupon = {
+              code: code,
+              discount: data.discount || 0,
+              targetPlan: data.targetPlan || 'ALL'
+            };
+            msgEl.style.color = '#16a34a';
+            msgEl.innerHTML = `✅ 折扣碼 <strong>${code}</strong> 套用成功！現折 <strong>NT$ ${data.discount}</strong> 元。`;
+            badgeEl.style.display = 'inline-block';
+            badgeEl.style.background = '#dcfce7';
+            badgeEl.style.color = '#15803d';
+            badgeEl.innerText = `已折 NT$ ${data.discount}`;
+          }
+        } else {
+          activeCoupon = null;
+          msgEl.style.color = '#dc2626';
+          msgEl.innerText = `❌ ${data?.message || '折扣碼無效或已過期'}`;
+          badgeEl.style.display = 'none';
+        }
+      } catch (err) {
+        // 若 GAS 網路延遲或離線，支援前端本地 YEAR100 降級容錯
+        if (code === 'YEAR100') {
+          if (currentPlan === 'YEARLY') {
+            activeCoupon = { code: 'YEAR100', discount: 100, targetPlan: 'YEARLY' };
+            msgEl.style.color = '#16a34a';
+            msgEl.innerHTML = `✅ 折扣碼 <strong>YEAR100</strong> 套用成功！年租方案現折 <strong>NT$ 100</strong> 元。`;
+            badgeEl.style.display = 'inline-block';
+            badgeEl.style.background = '#dcfce7';
+            badgeEl.style.color = '#15803d';
+            badgeEl.innerText = '已折 NT$ 100';
+          } else {
+            msgEl.style.color = '#dc2626';
+            msgEl.innerText = '❌ 折扣碼 YEAR100 僅適用於「工作室年租方案」！';
+            badgeEl.style.display = 'none';
+          }
+        } else {
+          msgEl.style.color = '#dc2626';
+          msgEl.innerText = '❌ 查詢折扣碼失敗，請稍後再試: ' + err.message;
+          badgeEl.style.display = 'none';
+        }
+      } finally {
+        applyBtn.disabled = false;
+        applyBtn.innerText = '套用';
+        updatePriceDisplay();
+      }
+    }
+
+    function resetCoupon(reason) {
+      activeCoupon = null;
+      const msgEl = document.getElementById('couponMsg');
+      const badgeEl = document.getElementById('couponStatusBadge');
+      if (reason) {
+        msgEl.style.display = 'block';
+        msgEl.style.color = '#dc2626';
+        msgEl.innerText = reason;
+      } else {
+        msgEl.style.display = 'none';
+      }
+      badgeEl.style.display = 'none';
+      updatePriceDisplay();
     }
 
     async function handleCheckout() {
@@ -947,7 +1084,11 @@
 
       try {
         const clientBackUrl = window.location.href;
-        const apiUrl = `${GAS_API_URL}?action=create_order&email=${encodeURIComponent(email)}&plan=${encodeURIComponent(currentPlan)}&clientBackUrl=${encodeURIComponent(clientBackUrl)}`;
+        let apiUrl = `${GAS_API_URL}?action=create_order&email=${encodeURIComponent(email)}&plan=${encodeURIComponent(currentPlan)}&clientBackUrl=${encodeURIComponent(clientBackUrl)}`;
+        
+        if (activeCoupon && activeCoupon.code) {
+          apiUrl += `&coupon=${encodeURIComponent(activeCoupon.code)}`;
+        }
 
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -972,7 +1113,7 @@
       } catch (err) {
         alert('建立訂單失敗: ' + err.message + '\n若您剛剛更新了 GAS 程式碼，請確認已在 Apps Script 重新建立「新版本」部署！');
         submitBtn.disabled = false;
-        submitBtn.innerText = '🔒 前往綠界科技安全結帳';
+        submitBtn.innerText = `🔒 前往綠界科技安全結帳 (NT$ ${getPayablePrice()})`;
       }
     }
 
